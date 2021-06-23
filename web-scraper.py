@@ -46,8 +46,8 @@ class Scraper():
 
         sender = 'mraurshal@gmail.com'
         recipient = 'kushalsubedi2@gmail.com'
-        # sender_pswd = getpass.getpass(prompt='PASSWORD:')
-        mail.login(sender, '2058@kus')
+        sender_pswd = getpass.getpass(prompt='PASSWORD:')
+        mail.login(sender_paswd)
 
         subject = '!NEW NOTICE ARRIVED FROM IOE!'
         body = self.total_notices[0:3]
