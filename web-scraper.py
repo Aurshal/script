@@ -3,10 +3,13 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 import getpass
+import datetime
+import os
 
 
 class Scraper():
     total_notices = []
+    sending_notices = []
 
     def scraping(self):
         self.total_notices = []
@@ -18,22 +21,19 @@ class Scraper():
             soup = BeautifulSoup(page.content, 'html.parser')
             table = soup.find_all('tr')
             # print(table)
-
             for notices in table:
                 notice_atag = notices.find('a')
                 notice_name = notices.find('span')
                 notice_date = notices.select('td:nth-child(3)')
                 if(len(notice_date) == 1):
-                    print((notice_date[0].text).strip(','))
-                # print(notice_date)
+                    d = ((notice_date[0].text).split(', '))
+
                 if notice_atag == None:
                     continue
                 link_to_notice = URL+notice_atag['href']
                 link = link_to_notice.replace(' ', '%20')
-                # print(notice_name.text)
-                # print(link)
 
-                self.total_notices.append((notice_name.text, link))
+                self.total_notices.append((notice_name.text, d[1], link,))
 
         else:
             print('Server Error')
@@ -49,18 +49,27 @@ class Scraper():
 
         sender = 'mraurshal@gmail.com'
         recipient = 'kushalsubedi2@gmail.com'
-        sender_pswd = getpass.getpass(prompt='PASSWORD:')
-        mail.login(sender_paswd)
+        sender_pswd = os.environ.get('psd')
+        mail.login(sender, sender_pswd)
 
         subject = '!NEW NOTICE ARRIVED FROM IOE!'
-        body = self.total_notices[0:3]
+        body = self.sending_notices[0:]
         msg = f"Subject:{subject}\n\n{body}"
         mail.sendmail(sender, recipient, msg)
         mail.quit()
 
 
+today = datetime.datetime.now()
 # while True:
 data = Scraper()
 data.scraping()
 notices = data.total_notices
-x = len(notices)
+for notice in notices:
+    if(notice[1] == today):
+        data.sending_notices.append(notice)
+    else:
+        continue
+if(len(data.sending_notices) == 0):
+    data.send_notice()
+else:
+    print("No new notices to send")
