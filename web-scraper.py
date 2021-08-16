@@ -10,6 +10,7 @@ import os
 class Scraper():
     total_notices = []
     sending_notices = []
+    sent = False
 
     def scraping(self):
         self.total_notices = []
@@ -47,19 +48,22 @@ class Scraper():
         mail.starttls()
         mail.ehlo()
 
-        sender = 'mraurshal@gmail.com'
-        recipient = 'kushalsubedi2@gmail.com'
+        sender = os.environ.get('sender')
+        recipient = [x for x in (os.environ.get('receiver')).split(" ")]
         sender_pswd = os.environ.get('psd')
         mail.login(sender, sender_pswd)
 
         subject = '!NEW NOTICE ARRIVED FROM IOE!'
         body = self.sending_notices[0:]
-        msg = f"Subject:{subject}\n\n{body}"
-        mail.sendmail(sender, recipient, msg)
+        for i in body:
+            xyz = f"{i[0]}\nDate: {i[1]}\nLink: {i[2]}"
+            msg = f"Subject:{subject}\n\n{xyz}"
+            mail.sendmail(sender, recipient, msg)
+        sent = True
         mail.quit()
 
 
-today = datetime.datetime.now()
+today = (datetime.datetime.now()).strftime("%B %d")
 # while True:
 data = Scraper()
 data.scraping()
@@ -69,7 +73,7 @@ for notice in notices:
         data.sending_notices.append(notice)
     else:
         continue
-if(len(data.sending_notices) == 0):
+if(len(data.sending_notices) > 0 and sent == False):
     data.send_notice()
 else:
     print("No new notices to send")
