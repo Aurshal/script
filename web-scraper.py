@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import smtplib
-import time
-import getpass
 import datetime
 import os
 
