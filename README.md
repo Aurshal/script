@@ -16,7 +16,7 @@ source virtual-env-name/bin/activate
 ```
 # Windows: 
 ```python
-tutorial-env\Scripts\activate.bat
+virtual-env-name\Scripts\activate.bat
 ```
 
 # Install required libraries
