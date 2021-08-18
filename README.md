@@ -1,4 +1,5 @@
-# IOE-Notice Scraper
+# IOE-Notice Scraper(Beta)
+
 
 # Install required library
 
@@ -29,5 +30,4 @@ Makesure to create enviroment variables as required in the code.
 python web-scraper.py
 ```
 
-#IT IS UNDER WORK.
 
