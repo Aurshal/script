@@ -4,17 +4,21 @@
 
 Create a virtual environment or you can directly install in the system.
 
-##To create virtual enviroment
+## To create virtual enviroment
 ```python
-pythom -m venv virtual-env-name
+python -m venv virtual-env-name
 ```
-##To activate virtual env
+## To activate virtual env
+## Linux/Mac:
 ```python
 Linux/Mac: source virtual-env-name/bin/activate
-Windows: tutorial-env\Scripts\activate.bat
+```
+## Windows: 
+```python
+tutorial-env\Scripts\activate.bat
 ```
 
-##Install required libraries
+## Install required libraries
 ```bash
 pip install -r requirements.txt
 ```
