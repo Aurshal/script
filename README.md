@@ -6,16 +6,16 @@
 Create a virtual environment or you can directly install in the system.
 
 ### To create virtual enviroment
-```python
+```bash
 python -m venv virtual-env-name
 ```
 ### To activate virtual env
 #### Linux/Mac:
-```python
+```bash
 source virtual-env-name/bin/activate
 ```
 #### Windows: 
-```python
+```bash
 virtual-env-name\Scripts\activate.bat
 ```
 
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ### Usage
 #### Makesure to create enviroment variables as required in the code.
-```python
+```bash
 python web-scraper.py
 ```
 
