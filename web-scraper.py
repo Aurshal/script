@@ -8,7 +8,6 @@ import os
 class Scraper():
     total_notices = []
     sending_notices = []
-    sent = False
 
     def scraping(self):
         self.total_notices = []
@@ -71,7 +70,7 @@ for notice in notices:
         data.sending_notices.append(notice)
     else:
         continue
-if(len(data.sending_notices) > 0 and sent == False):
+if(len(data.sending_notices) > 0):
     data.send_notice()
 else:
     print("No new notices to send")
