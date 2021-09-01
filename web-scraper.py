@@ -60,7 +60,7 @@ class Scraper():
         mail.quit()
 
 
-today = (datetime.datetime.now()).strftime("%B %d")
+today = (datetime.datetime.now()).strftime("%B %-d")
 # while True:
 data = Scraper()
 data.scraping()
